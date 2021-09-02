@@ -51,6 +51,8 @@ const followersArray = [];
       </div>
     </div>
 */
+// Grabbing the div that will hold all this info
+const divCard = document.querySelector('.cards');
 
 const cardMaker = ({ avatar_url, name, login, location, html_url, followers, following, bio }) => {
   //instantiating the elements
@@ -69,7 +71,7 @@ const cardMaker = ({ avatar_url, name, login, location, html_url, followers, fol
   //adding content and classes 
   card.classList.add('card');
   info.classList.add('card-info');
-  name.classList.add('name');
+  realName.classList.add('name');
   userName.classList.add('username');
 
   img.src = avatar_url;
@@ -82,6 +84,21 @@ const cardMaker = ({ avatar_url, name, login, location, html_url, followers, fol
   userFollowers.textContent = followers;
   userFollows.textContent = following;
   userBio.textContent = bio;
+
+  //setting up structure
+  divCard.appendChild(card);
+  card.appendChild(img);
+  card.appendChild(info);
+  info.appendChild(realName);
+  info.appendChild(userName);
+  info.appendChild(userLocation);
+  info.appendChild(profile);
+  info.appendChild(userFollowers);
+  info.appendChild(userFollows);
+  info.appendChild(userBio);
+
+  //returning the info
+  return card;
 }
 
 
