@@ -1,3 +1,4 @@
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
@@ -5,6 +6,12 @@
 */
 
 axios.get('https://api.github.com/users/Ryan-E-Mark')
+.then(resp => {
+  console.log(resp.data)
+})
+.catch(err => {
+  console.log('error');
+})
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -18,7 +25,21 @@ axios.get('https://api.github.com/users/Ryan-E-Mark')
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+// const CreateUserCard = async (person) => {
+//   try {
+//     const dataGrab = await axios.get(`https://api.github.com/users/${person}`);
+//     dataGrab.forEach(user => {
+//       const userCard = cardMaker(user);
+//     })
 
+//   } catch(err) {
+//     console.log(err);
+//   } finally {
+//     console.log('oohhhh youre trying!');
+//   }
+// }
+
+// CreateUserCard(Ryan-E-Mark);
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -86,7 +107,7 @@ const cardMaker = ({ avatar_url, name, login, location, html_url, followers, fol
   userBio.textContent = bio;
 
   //setting up structure
-  divCard.appendChild(card);
+  // divCard.appendChild(card);
   card.appendChild(img);
   card.appendChild(info);
   info.appendChild(realName);
@@ -101,7 +122,27 @@ const cardMaker = ({ avatar_url, name, login, location, html_url, followers, fol
   return card;
 }
 
+const person = 'Ryan-E-Mark';
 
+const CreateUserCard = async (person) => {
+  try {
+    const dataGrab = await axios.get(`https://api.github.com/users/${person}`);
+    
+    for (let i = 0; i < dataGrab.data.length; i++) {
+      const userData = { avatar_url, name, login, location, html_url, followers, following, bio };
+      const gitCard = cardMaker(userData);
+      divCard.appendChild(gitCard);
+    }
+    console.log(dataGrab);
+
+  } catch(err) {
+    console.log(err);
+  } finally {
+    console.log('oohhhh youre trying!');
+  }
+}
+
+CreateUserCard(person);
 
 /*
   List of LS Instructors Github username's:
