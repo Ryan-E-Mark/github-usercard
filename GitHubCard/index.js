@@ -51,7 +51,11 @@ axios.get('https://api.github.com/users/Ryan-E-Mark')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell'];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -122,27 +126,30 @@ const cardMaker = ({ avatar_url, name, login, location, html_url, followers, fol
   return card;
 }
 
-const person = 'Ryan-E-Mark';
+const person1 = 'Ryan-E-Mark';
 
 const CreateUserCard = async (person) => {
   try {
-    const dataGrab = await axios.get(`https://api.github.com/users/${person}`);
-    
-    for (let i = 0; i < dataGrab.data.length; i++) {
-      const userData = { avatar_url, name, login, location, html_url, followers, following, bio };
+    const resp = await axios.get(`https://api.github.com/users/${person}`);
+    // for (let i = 0; i < resp.data.length; i++) {
+      const userData = resp.data;
       const gitCard = cardMaker(userData);
       divCard.appendChild(gitCard);
-    }
-    console.log(dataGrab);
+      console.log(gitCard);
+    // }
+    
 
   } catch(err) {
-    console.log(err);
-  } finally {
-    console.log('oohhhh youre trying!');
-  }
+    console.log('error');
+  } 
 }
 
-CreateUserCard(person);
+CreateUserCard(person1);
+
+followersArray.forEach(follower => {
+  CreateUserCard(follower);
+})
+
 
 /*
   List of LS Instructors Github username's:
