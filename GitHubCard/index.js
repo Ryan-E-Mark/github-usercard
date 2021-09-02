@@ -52,6 +52,40 @@ const followersArray = [];
     </div>
 */
 
+const cardMaker = ({ avatar_url, name, login, location, html_url, followers, following, bio }) => {
+  //instantiating the elements
+  const card = document.createElement('div');
+  const img = document.createElement('img');
+  const info = document.createElement('div');
+  const realName = document.createElement('h3');
+  const userName = document.createElement('p');
+  const userLocation = document.createElement('p');
+  const profile = document.createElement('p');
+  const userUrl = document.createElement('a');
+  const userFollowers = document.createElement('p');
+  const userFollows = document.createElement('p');
+  const userBio = document.createElement('p');
+
+  //adding content and classes 
+  card.classList.add('card');
+  info.classList.add('card-info');
+  name.classList.add('name');
+  userName.classList.add('username');
+
+  img.src = avatar_url;
+  realName.textContent = name;
+  userName.textContent = login;
+  userLocation.textContent = `Location: ${location}`;
+  userUrl.href = html_url;
+  userUrl.textContent = html_url;
+  profile.textContent = `Profile: ${userUrl}`;
+  userFollowers.textContent = followers;
+  userFollows.textContent = following;
+  userBio.textContent = bio;
+}
+
+
+
 /*
   List of LS Instructors Github username's:
     tetondan
